@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment - Lucrul cu datele pe front-end</title>
+</head>
+<body>
+
+    <script>
+
+        var data = '{ "quiz": [{ "q1": { "question": "Which one is correct team name in NBA?", "options": ["New York Bulls","Los Angeles Kings","Golden State Warriros","Huston Rocket"],"answer": "Huston Rocket"}}, {"q2": {"question": "Namaste is a traditional greeting in which Asian language?", "options": ["Hindi","Mandarin","Nepalese","Thai"], "answer": "Hindi"}}, {"q3": {"question": "The Spree river flows through which major European capital city?","options": ["Berlin","Paris","Rome","London"],"answer": "Berlin"}}, {"q4": {"question": "Which famous artist had both a Rose Period and a Blue Period?","options": ["Pablo Picasso","Vincent van Gogh","Salvador Dalí","Edgar Degas"],"answer": "Pablo Picasso"}}]}';
+        
+        
+        var dataObject = JSON.parse(data);
+        var quiz = dataObject['quiz'];
+
+
+                for (let i = 0; i < quiz.length; i++) {
+
+                    var options = quiz[i][`q${i+1}`]['options'];
+                    var question = quiz[i][`q${i+1}`]['question'];
+                    var textRaspunsuri = '';
+
+                    for (let j = 0; j < options.length; j++) {
+                        
+
+                        textRaspunsuri += '<input type="radio"  id="' +`q${i+1}` + '" name="' + i + '" value="' + options[j] + '"';
+
+                         var dePrimit = '';
+                         if (dePrimit == options[j]) {
+                            textRaspunsuri += ' checked>';
+                        };
+
+                        textRaspunsuri += '<label for="' + options[j] + '">' + options[j] + '</label><br>';
+                    }
+                    document.body.innerHTML += '<form id="' + i + '"><h2>Question ' + (i + 1) + ': ' + question + '</h2>' + textRaspunsuri + '</form>'; 
+   
+                }
+
+        
+
+                
+        var submitButton = document.getElementById('submit');
+
+        function save() {
+            var inputCheck = document.getElementsByTagName('input');
+            if (inputCheck.checked){
+                localStorage.setItem('input', true);
+            } 
+            console.log(inputCheck[1]);
+           
+        }
+
+
+
+
+
+                //incercare esuata CORS
+        // const loadFile = () => { 
+        // //CORS URL
+        // let corsURL = 'https://cors-anywhere.herokuapp.com/';
+
+        // //My File URL
+        // let myURL = 'https://www.link-elearning.com/linkdl/coursefiles/1470/quiz.json';
+
+        // fetch(corsURL + myURL, { mode: 'no-cors'})
+        //     .then(response => response.json())
+        //     .then(content => {
+        //     console.log('test');
+        //     })
+        // }
+
+
+            //incercare esuata CORS
+        // (async () => {
+        //     try {
+        //         let response = await fetch('quiz.json', { mode: 'no-cors'});
+        //         if (!response.ok) {
+        //             throw new Error("Error while reading file.");
+        //         }
+        //         let message = await response.json();
+
+        //         console.log(message);
+
+        //         var textRaspunsuri = '';
+        //         for (let x = 0; x < Object.keys(quiz[j].options).length; x++) {
+        //             textRaspunsuri += '<input type="radio"  id="' + quiz[j].options[x] + '" name="' + j + '" value="' + quiz[j].options[x] + '"';
+
+        //             if (dePrimit == quiz[j].options[x]) {
+        //                 textRaspunsuri += ' checked>';
+        //             }
+
+        //             textRaspunsuri += '<label for="' + quiz[j].options[x] + '">' + quiz[j].options[x] + '</label><br>';
+        //         }
+
+        //         document.body.innerHTML += '<form id="' + j + '"><h2>Question ' + (i + 1) + ': ' + quiz[j].question + '</h2>' + textRaspunsuri + '</form>'; 
+
+        //     } catch (err) {
+        //         console.log('Fetch problem: ' + err.message);
+        //     }
+        //     })();
+
+
+
+
+
+
+                //incercare esuata CORS
+        // fetch('quiz.json', { mode: 'no-cors'}).then(function(response) {
+        //     return response.json();
+        //     let quiz = JSON.parse(json);
+        // }).then(function(quiz) {
+
+      
+        //         var textRaspunsuri = '';
+        //         for (let x = 0; x < Object.keys(quiz[j].options).length; x++) {
+        //             textRaspunsuri += '<input type="radio"  id="' + quiz[j].options[x] + '" name="' + j + '" value="' + quiz[j].options[x] + '"';
+
+        //             if (dePrimit == quiz[j].options[x]) {
+        //                 textRaspunsuri += ' checked>';
+        //             }
+
+        //             textRaspunsuri += '<label for="' + quiz[j].options[x] + '">' + quiz[j].options[x] + '</label><br>';
+        //         }
+
+        //         document.body.innerHTML += '<form id="' + j + '"><h2>Question ' + (i + 1) + ': ' + quiz[j].question + '</h2>' + textRaspunsuri + '</form>';   
+        // }).catch(function(err) {
+        //     console.log('Error: ' + err.message);
+        // });
+    
+    </script>
+
+<button id="submit" onclick="save()">Submit answers</button>
+
+</body>
+</html>
